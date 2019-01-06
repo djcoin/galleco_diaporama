@@ -68,7 +68,8 @@ function createAll(e, data) {
   const ids = data.map(({id}) => id);
   var idx = 0;
 
-  return; 
+  // var interval = 1000;
+
   setInterval(() => {
     console.log("SCROLLING")
     const id = `link-${ids[idx]}`;
@@ -78,7 +79,7 @@ function createAll(e, data) {
     e.scrollIntoView();
 
     idx = (idx + 1) % ids.length;
-  }, 2000);
+  }, interval);
 
 }
 
