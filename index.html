@@ -3,6 +3,10 @@
 <!--
 echo -e "var g_imgs = \`\n$(find . -iname "*jpg" -or -iname "*jpeg" -or -iname "*png")\n\`" > imgs.js
 echo -e "var g_annuaire = \`\n$(cat annuaire.csv)\n\`" > annuaire.js
+
+for d in *; do ( cd $d; find . \( -iname "*jpg" -or -iname "*jpeg" -or -iname "*png" \) -printf '%f\n' | nl -s@ | while IFS="@" read i x; do i=$(echo $i | xargs); mv $x ${i}__$x; done ); done
+
+
 -->
 
 <head>
@@ -69,6 +73,7 @@ echo -e "var g_annuaire = \`\n$(cat annuaire.csv)\n\`" > annuaire.js
   .footer {
     background-color: #27aae1;
     text-align: center;
+    margin-top: 50px;
   }
 
   .body {
@@ -100,11 +105,15 @@ echo -e "var g_annuaire = \`\n$(cat annuaire.csv)\n\`" > annuaire.js
     max-width: 100vw;
     max-height: 100%;
     height: 100%;
-    padding: 50px 0;
+    /* padding: 50px 0; */
+  }
+
+  .imgs-line2 {
+    margin-top: 20px;
   }
 
   .imgs .img-wrapper {
-    margin: 20px;
+    margin: 0 50px;
     width:100%;
     height:100%;
   }
@@ -136,6 +145,7 @@ echo -e "var g_annuaire = \`\n$(cat annuaire.csv)\n\`" > annuaire.js
 
   .descr {
     font-size: 40px;
+    margin-bottom: 50px;
   }
 
   </style>

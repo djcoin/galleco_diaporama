@@ -1,7 +1,10 @@
 
 const f = (url) => {
+  const [fname] = url.split('/').reverse();
+  const line = fname[0] == "v" ? 2 : 1;
+
   return {
-    url, x: null, y: null, height: null, width: null
+    url, x: null, y: null, height: null, width: null, line
   }
 }
 
@@ -41,7 +44,18 @@ console.log(data)
 data = data.map((line) => {
   const [_a,_b,id,kind,city,name,descr,other] = line.split(";")
 
-  var imgs = (d_imgs[id] || []).map(f)
+  // names are sorted alpha + x should be ignored
+  var imgs = (d_imgs[id] || [])
+    .filter(x => {
+      var [fname] = x.split('/').reverse();
+      // accept extra v to say it goes on next line
+      fname = fname[0] == "v" ? fname.slice(1) : fname;
+
+      return fname.slice(1,3) === "__" && fname.slice(0,3) !== "x__";
+    })
+    .sort()
+    .map(f);
+
 
   return {id, kind, city, descr, name, other, imgs};
 })
