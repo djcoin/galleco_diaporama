@@ -29,12 +29,13 @@ green: #63b66e
 yellow: #f9ba2b
 */
 
-.header .col1, .header .col2, .footer, .body {
+.header .col1, .footer, .body {
   display: flex;
   flex-direction: column;
 }
 
 .header {
+  position: relative;
   display: flex;
   flex-direction: row;
 }
@@ -47,9 +48,26 @@ yellow: #f9ba2b
 .header .col1 {
   flex-grow: 1;
 }
+
 .header .col2 {
+  position: absolute;
+  right: 0;
+  display: flex;
   align-items: center;
+  height: 100%;
+}
+
+/*
+.header .col2 {
+  background-color: white;
   padding: 20px;
+}
+*/
+
+.header .col2 img {
+  margin: 15px;
+  padding: 20px;
+  background-color: white;
 }
 
 
