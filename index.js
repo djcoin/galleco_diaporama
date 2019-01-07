@@ -60,6 +60,7 @@ function template(json, {getNext, getPrev, diaporama}) {
         </div>
       </div>
       <div class="col1">
+        <div class="kind">${kind}</div>
         <div class="city">${city} ${id_str}</div>
         <div class="name">${name}</div>
       </div>
@@ -73,8 +74,7 @@ function template(json, {getNext, getPrev, diaporama}) {
       </div>
       ${imgs_html_2.length ? '<div class="imgs imgs-line2">'+ imgs_html_2.join('\n') +'</div>' : ''}
     </div>
-    <div class="footer">
-      <div class="kind">${kind}</div>
+    <div class="footer-xxx">
     </div>
   </div>
   `;
