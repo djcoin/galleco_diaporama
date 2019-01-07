@@ -81,7 +81,51 @@ function template(json, {getNext, getPrev, diaporama}) {
 }
 
 
-function createAll(e, data) {
+// node container, ids (list of anchors, will be prefix by link-), interval for diapo
+function createDiaporama(node, ids, interval = 1000) {
+  var id_diapo = null;
+
+  stop = () => {
+    id_diapo && id_diapo();
+    id_diapo = null
+    node.classList.add("diaporama-off")
+    node.classList.remove("diaporama-on")
+  }
+
+  start = () => {
+    id_diapo = startDiapo(ids, interval);
+    node.classList.add("diaporama-on")
+    node.classList.remove("diaporama-off")
+  }
+
+  toggle = () => {
+    id_diapo === null ? start() : stop()
+  }
+
+
+  function startDiapo(ids, interval) {
+    var idx = 0;
+
+    const i = setInterval(() => {
+      const id = `link-${ids[idx]}`;
+      const e = document.getElementById(id);
+      // window.scrollTo(0, e.offsetTop);
+      e.scrollIntoView();
+
+      idx = (idx + 1) % ids.length;
+    }, interval);
+
+    return () => {
+      clearInterval(i);
+    }
+  }
+
+
+  return { start, stop, toggle }
+}
+
+
+function createAll(e, data, {autostart, interval}) {
   const ids = data.map(({id}) => id);
 
   const getNext = (id) => { return (id + 1) % ids.length; };
@@ -92,53 +136,16 @@ function createAll(e, data) {
 
   var l = createList(xs)
 
-
   var node = e.appendChild(l);
 
-  var id_diapo = null;
-
-
-  toggleDiaporama = (init) => {
-    if (id_diapo !== null || init === false) {
-      id_diapo && id_diapo();
-      id_diapo = null
-      node.classList.add("diaporama-off")
-      node.classList.remove("diaporama-on")
-    } else {
-      id_diapo = startDiapo(ids);
-      node.classList.add("diaporama-on")
-      node.classList.remove("diaporama-off")
-    }
-  }
+  const {start, stop, toggle} = createDiaporama(node, ids, interval)
 
   node.addEventListener("click", function(e) {
     if (e.target.className.indexOf("diaporama-toggle") != -1) {
-      toggleDiaporama()
+      toggle();
     }
   })
 
-  const autostart = true;
-  toggleDiaporama(autostart);
-}
-
-function startDiapo(ids) {
-  var interval = 1000;
-  var idx = 0;
-
-  const i = setInterval(() => {
-    console.log("SCROLLING")
-    const id = `link-${ids[idx]}`;
-    const e = document.getElementById(id);
-    // window.scrollTo(0, e.offsetTop);
-
-    e.scrollIntoView();
-
-    idx = (idx + 1) % ids.length;
-  }, interval);
-
-  return () => {
-    console.log("YO");
-    clearInterval(i);
-  }
+  autostart ? start() : stop();
 }
 

@@ -39,8 +39,13 @@ for d in *; do ( cd $d; find . \( -iname "*jpg" -or -iname "*jpeg" -or -iname "*
   <div id="content"></div>
 
   <script>
+    const diapo_opt = {
+      autostart: true,
+      interval: 1000
+    };
+
     const elem = document.getElementById("content")
-    createAll(elem, data);
+    createAll(elem, data, diapo_opt);
   </script>
 
 </body>
