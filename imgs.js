@@ -171,8 +171,8 @@ var g_imgs = `
 ./res/9/3__vracbiocoop-heron-bleu-redon.JPG
 ./res/9/2__biocoop-le-hedon-bleuredondevanture.JPG
 ./res/34/2__mutuelle-pays-de-vilaine.png
+./res/34/1__mutuelle_pays_de_vilaine_03523600_145658440.jpeg
 ./res/34/3__equipe2012gm__090638100_1102_22122011.jpg
-./res/34/1__pre_mut01__022392600_1117_30072010.jpg
 ./res/12/1__1271_Remi_Geffray.jpg
 ./res/40/2__Anne-Auriault.jpg
 ./res/40/1__DSCN5298.jpg
@@ -204,6 +204,7 @@ var g_imgs = `
 ./res/20/-photo-tisquin---Copie.jpg
 ./res/10/1__Kristof_de_leveil_au_chocolat.jpg
 ./res/10/3__fb_12036707_873358299427282_5417189844420019165_n.jpg
+./res/10/une-regate-de-petits-bateaux-vapeur-samedi.jpg
 ./res/10/2__fb_812796_391178997645217_1468825868_o.jpg
 ./res/23/1__2.jpg
 ./res/23/2__earl-le-verger.jpg
@@ -291,9 +292,9 @@ var g_imgs = `
 ./res/56/x__17991698_1442630099137587_9047965972456081472_o.jpg
 ./res/56/2__1421698416.png
 ./res/33/3__1408832778.jpg
-./res/33/2__1441098314.png
-./res/33/4__4962573.jpg
-./res/33/1__des-ateliers-nature-et-vocaux-avec-lassociation-terraeol.jpg
+./res/33/2__des-ateliers-nature-et-vocaux-avec-lassociation-terraeol.jpg
+./res/33/1__1441098314.png
+./res/33/x__4962573.jpg
 ./res/36/1__Fotolia_3672577_M1-300x199.jpg
 ./res/59/1__2014.VACHENANTAISE_783x400.jpeg
 ./res/59/3__logo ESS Bretagne_0x0.jpg

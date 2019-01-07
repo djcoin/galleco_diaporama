@@ -34,10 +34,13 @@ function template(json) {
   // const data = `data-masonry='{ "itemSelector": ".img-wrapper", "columnWidth": ${width} }'`
   // const data = `data-masonry='{ "itemSelector": ".img-wrapper", "percentPosition": true }`
 
+  const show_id = false;
+  const id_str = show_id ? `(${id})` : '';
+
   return `
   <div class="slide" id="link-${id}">
     <div class="header">
-      <div class="city">${city} (${id})</div>
+      <div class="city">${city} ${id_str}</div>
       <div class="name">${name}</div>
     </div>
     <div class="body">
@@ -68,7 +71,9 @@ function createAll(e, data) {
   const ids = data.map(({id}) => id);
   var idx = 0;
 
-  // var interval = 1000;
+  return;
+
+  var interval = 1000;
 
   setInterval(() => {
     console.log("SCROLLING")
