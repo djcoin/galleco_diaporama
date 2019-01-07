@@ -40,8 +40,13 @@ function template(json) {
   return `
   <div class="slide" id="link-${id}">
     <div class="header">
-      <div class="city">${city} ${id_str}</div>
-      <div class="name">${name}</div>
+      <div class="col2">
+        <img src="static/img/logo_galleco.jpg"></img>
+      </div>
+      <div class="col1">
+        <div class="city">${city} ${id_str}</div>
+        <div class="name">${name}</div>
+      </div>
     </div>
     <div class="body">
       <div class="descr">

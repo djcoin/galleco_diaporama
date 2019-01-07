@@ -29,16 +29,31 @@ green: #63b66e
 yellow: #f9ba2b
 */
 
-.header, .footer, .body {
+.header .col1, .header .col2, .footer, .body {
   display: flex;
   flex-direction: column;
 }
 
-.header, .footer {
+.header {
+  display: flex;
+  flex-direction: row;
+}
+
+.header .col1, .header .col2, .footer {
   justify-content: center;
 }
 
-.header {
+
+.header .col1 {
+  flex-grow: 1;
+}
+.header .col2 {
+  align-items: center;
+  padding: 20px;
+}
+
+
+.header .col1 {
   background-color: #27aae1;
   text-align: center;
 }
@@ -112,12 +127,14 @@ yellow: #f9ba2b
 .kind {
   font-family: Inconsolata;
   font-size: 30px;
+  text-transform: uppercase;
 }
 
 .city {
   font-family: Inconsolata;
   font-size: 40px;
   padding: 10px 0;
+  text-transform: capitalize;
 }
 
 .descr {
