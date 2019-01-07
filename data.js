@@ -26,7 +26,8 @@ var data = [{
 var d_imgs = {};
 
 g_imgs.split("\n").forEach(line => {
-  const [_a, res, id] = line.split('/')
+  var [_a, res, id] = line.split('/')
+  id = parseInt(id)
   if (d_imgs[id]) {
     d_imgs[id].push(line)
   } else {
@@ -42,7 +43,8 @@ var data = g_annuaire.split("\n")
 console.log(data)
 
 data = data.map((line) => {
-  const [_a,_b,id,kind,city,name,descr,other] = line.split(";")
+  var [_a,_b,id,kind,city,name,descr,other] = line.split(";")
+  var id = parseInt(id);
 
   // names are sorted alpha + x should be ignored
   var imgs = (d_imgs[id] || [])
