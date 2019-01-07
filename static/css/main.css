@@ -52,9 +52,8 @@ yellow: #f9ba2b
 .header .col2 {
   position: absolute;
   right: 0;
-  display: flex;
-  align-items: center;
   height: 100%;
+  padding: 10px;
 }
 
 /*
@@ -64,12 +63,32 @@ yellow: #f9ba2b
 }
 */
 
-.header .col2 img {
-  margin: 15px;
-  padding: 20px;
+
+.header .col2-inner {
+  border: 1px solid #ccc;
+  height: 100%;
   background-color: white;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 1px 1px 15px #222;
 }
 
+.header .col2 img, .header .col2 .logo-text {
+  padding: 6px 10px;
+}
+
+.header .col2-inner .logo-text {
+  font-size: 26px;
+  line-height: 26px;
+  /* font-style: italic; */
+  background-color: #f9ba2b88;
+  border-bottom: 1px solid #ccc;
+}
+
+.header .col2-inner img {
+}
 
 .header .col1 {
   background-color: #27aae1;

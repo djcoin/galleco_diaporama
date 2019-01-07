@@ -41,7 +41,10 @@ function template(json) {
   <div class="slide" id="link-${id}">
     <div class="header">
       <div class="col2">
-        <img src="static/img/logo_galleco.jpg"></img>
+        <div class="col2-inner">
+          <div class="logo-text">Ils l'utilisent !</div>
+          <img src="static/img/logo_galleco.jpg"></img>
+        </div>
       </div>
       <div class="col1">
         <div class="city">${city} ${id_str}</div>
@@ -77,7 +80,6 @@ function createAll(e, data) {
   var idx = 0;
 
   return;
-
   var interval = 1000;
 
   setInterval(() => {
