@@ -22,6 +22,7 @@
 
 @media print {
   .slide { padding: 0px }
+  .controls { display: none; }
 }
 /*
 blue: #27aae1
@@ -94,6 +95,34 @@ yellow: #f9ba2b
   background-color: #27aae1;
   text-align: center;
 }
+
+.controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 20px;
+  font-size: 1.5em;
+  color: #333;
+  opacity: 0.5;
+}
+
+.controls a {
+  color: #333;
+  text-decoration: none;
+}
+
+.controls i {
+  display: block;
+  margin-bottom: 8px;
+  cursor: pointer;
+
+}
+
+.diaporama-on .diaporama-toggle.fa-play { display: none; }
+.diaporama-on .diaporama-toggle.fa-stop { display: block; }
+.diaporama-off .diaporama-toggle.fa-play { display: block; }
+.diaporama-off .diaporama-toggle.fa-stop { display: none; }
+
 
 .footer {
   background-color: #27aae1;

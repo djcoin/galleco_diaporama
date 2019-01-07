@@ -8,7 +8,7 @@ function createList(xs) {
   return div;
 }
 
-function template(json) {
+function template(json, {getNext, getPrev, diaporama}) {
   const {id, kind, city, name, descr, other, imgs} = json;
 
   const createImg = ({url, x, y, height, width}) => {
@@ -40,6 +40,19 @@ function template(json) {
   return `
   <div class="slide" id="link-${id}">
     <div class="header">
+      <div class="controls">
+        <a href="#link-${id}">
+          <i class="fas fa-link"></i>
+        </a>
+        <a href="#link-${getPrev(id)}">
+          <i class="fas fa-arrow-circle-up"></i>
+        </a>
+        <a href="#link-${getNext(id)}">
+          <i class="fas fa-arrow-circle-down"></i>
+        </a>
+        <i class="fas fa-play diaporama-toggle"></i>
+        <i class="fas fa-stop diaporama-toggle"></i>
+      </div>
       <div class="col2">
         <div class="col2-inner">
           <div class="logo-text">Ils l'utilisent !</div>
@@ -69,20 +82,50 @@ function template(json) {
 
 
 function createAll(e, data) {
-  var xs = data.map(template);
+  const ids = data.map(({id}) => id);
+
+  const getNext = (id) => { return (id + 1) % ids.length; };
+  const getPrev = (id) => { return (id - 1) % ids.length; };
+  const actions = {getNext, getPrev};
+
+  var xs = data.map((d) => template(d, actions))
 
   var l = createList(xs)
 
 
   var node = e.appendChild(l);
 
-  const ids = data.map(({id}) => id);
+  var id_diapo = null;
+
+
+  toggleDiaporama = (init) => {
+    if (id_diapo !== null || init === false) {
+      id_diapo && id_diapo();
+      id_diapo = null
+      node.classList.add("diaporama-off")
+      node.classList.remove("diaporama-on")
+    } else {
+      id_diapo = startDiapo(ids);
+      node.classList.add("diaporama-on")
+      node.classList.remove("diaporama-off")
+    }
+  }
+
+  node.addEventListener("click", function(e) {
+    if (e.target.className.indexOf("diaporama-toggle") != -1) {
+      toggleDiaporama()
+    }
+  })
+
+  const autostart = true;
+  toggleDiaporama(autostart);
+}
+
+function startDiapo(ids) {
+  var interval = 1000;
   var idx = 0;
 
-  return;
-  var interval = 1000;
-
-  setInterval(() => {
+  const i = setInterval(() => {
     console.log("SCROLLING")
     const id = `link-${ids[idx]}`;
     const e = document.getElementById(id);
@@ -93,5 +136,9 @@ function createAll(e, data) {
     idx = (idx + 1) % ids.length;
   }, interval);
 
+  return () => {
+    console.log("YO");
+    clearInterval(i);
+  }
 }
 
