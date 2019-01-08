@@ -27,7 +27,6 @@ var d_imgs = {};
 
 g_imgs.split("\n").forEach(line => {
   var [_a, res, id] = line.split('/')
-  id = parseInt(id)
   if (d_imgs[id]) {
     d_imgs[id].push(line)
   } else {
@@ -44,7 +43,6 @@ console.log(data)
 
 data = data.map((line) => {
   var [_a,_b,id,kind,city,name,descr,other] = line.split(";")
-  var id = parseInt(id);
 
   // names are sorted alpha + x should be ignored
   var imgs = (d_imgs[id] || [])

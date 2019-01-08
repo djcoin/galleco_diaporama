@@ -82,7 +82,7 @@ function template(json, {getNext, getPrev, diaporama}) {
 
 
 // node container, ids (list of anchors, will be prefix by link-), interval for diapo
-function createDiaporama(node, ids, interval = 1000) {
+function createDiaporama(node, getNextId, interval = 1000) {
   var id_diapo = null;
 
   stop = () => {
@@ -92,27 +92,22 @@ function createDiaporama(node, ids, interval = 1000) {
     node.classList.remove("diaporama-on")
   }
 
-  start = () => {
-    id_diapo = startDiapo(ids, interval);
+  start = (getNewNextId) => {
+    id_diapo = startDiapo(getNewNextId || getNextId, interval);
     node.classList.add("diaporama-on")
     node.classList.remove("diaporama-off")
   }
 
-  toggle = () => {
-    id_diapo === null ? start() : stop()
+  toggle = (getNewNextId) => {
+    id_diapo === null ? start(getNewNextId) : stop()
   }
 
 
-  function startDiapo(ids, interval) {
-    var idx = 0;
-
+  function startDiapo(getNextId, interval) {
     const i = setInterval(() => {
-      const id = `link-${ids[idx]}`;
-      const e = document.getElementById(id);
+      const e = document.getElementById(getNextId())
       // window.scrollTo(0, e.offsetTop);
       e.scrollIntoView();
-
-      idx = (idx + 1) % ids.length;
     }, interval);
 
     return () => {
@@ -128,8 +123,8 @@ function createDiaporama(node, ids, interval = 1000) {
 function createAll(e, data, {autostart, interval}) {
   const ids = data.map(({id}) => id);
 
-  const getNext = (id) => { return (id + 1) % ids.length; };
-  const getPrev = (id) => { return (id - 1) % ids.length; };
+  const getNext = (id) => ids[(ids.indexOf(id) + 1) % ids.length]
+  const getPrev = (id) => ids[(ids.indexOf(id) - 1 + ids.length) % ids.length]
   const actions = {getNext, getPrev};
 
   var xs = data.map((d) => template(d, actions))
@@ -138,11 +133,15 @@ function createAll(e, data, {autostart, interval}) {
 
   var node = e.appendChild(l);
 
-  const {start, stop, toggle} = createDiaporama(node, ids, interval)
+  var getNextElemId = (id) => () => { id = getNext(id); return `link-${id}`; }
+
+  var starter = () => getNextElemId(ids[ids.length - 1])
+
+  const {start, stop, toggle} = createDiaporama(node, starter(), interval)
 
   node.addEventListener("click", function(e) {
     if (e.target.className.indexOf("diaporama-toggle") != -1) {
-      toggle();
+      toggle(starter());
     }
   })
 

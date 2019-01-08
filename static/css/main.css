@@ -191,7 +191,7 @@ yellow: #f9ba2b
 
 .kind {
   font-family: Inconsolata;
-  font-size: 30px;
+  font-size: 36px;
   padding: 10px 0;
   text-transform: uppercase;
   background-color: #63b66e;
@@ -200,7 +200,7 @@ yellow: #f9ba2b
 
 .city {
   font-family: Inconsolata;
-  font-size: 26px;
+  font-size: 40px;
   padding: 10px 0;
   text-transform: capitalize;
 }
