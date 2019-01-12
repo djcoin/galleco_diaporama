@@ -1,4 +1,6 @@
 
+// line 2 if starts with v
+
 const f = (url) => {
   const [fname] = url.split('/').reverse();
   const line = fname[0] == "v" ? 2 : 1;
@@ -7,21 +9,6 @@ const f = (url) => {
     url, x: null, y: null, height: null, width: null, line
   }
 }
-
-/*
-var data = [{
-  id: 1,
-  kind: "BARS, RESTAURANTS, SALONS DE THÉ",
-  city: "Redon",
-  name: "Ciné Café",
-  descr: "Bar et petite restauration",
-  other: "12 quai Jean Bart – 02 99 72 41 68",
-  imgs: []
-}].map((x) => {
-  x.imgs = x.imgs.map(f)
-  return x;
-});
-*/
 
 var d_imgs = {};
 

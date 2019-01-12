@@ -11,7 +11,7 @@ function createList(xs) {
 function template(json, {getNext, getPrev, diaporama}) {
   const {id, kind, city, name, descr, other, imgs} = json;
 
-  const createImg = ({url, x, y, height, width}) => {
+  const createImg = ({url, x, y, height, width}, imgs) => {
 
     const style = [
       width && `width:${width}px`,
@@ -21,14 +21,17 @@ function template(json, {getNext, getPrev, diaporama}) {
     ].filter(x => x).join(";")
 
     const wrapper_style = [
-      `width:${100 / imgs.length}%`,
+      `width:${100 / (imgs.length == 1 ? 2 : imgs.length)}%`, // max is 50%
     ].join(";")
 
     return `<div class="img-wrapper" style="${wrapper_style}"><img src="${url}" style="${style}"></img></div>`;
   }
 
-  const imgs_html_1 = imgs.filter((x) => x.line == 1).map(createImg);
-  const imgs_html_2 = imgs.filter((x) => x.line == 2).map(createImg);
+  const imgs_1 = imgs.filter((x) => x.line == 1);
+  const imgs_2 = imgs.filter((x) => x.line == 2);
+
+  const imgs_html_1 = imgs_1.map((img) => createImg(img, imgs_1));
+  const imgs_html_2 = imgs_2.map((img) => createImg(img, imgs_2));
 
   // const width = window.innerWidth * 0.4;
   // const data = `data-masonry='{ "itemSelector": ".img-wrapper", "columnWidth": ${width} }'`
@@ -69,10 +72,12 @@ function template(json, {getNext, getPrev, diaporama}) {
       <div class="descr">
         ${descr}
       </div>
-      <div class="imgs imgs-line1">
-        ${imgs_html_1.join('\n')}
+      <div class="all-imgs">
+        <div class="imgs imgs-line1">
+          ${imgs_html_1.join('\n')}
+        </div>
+        ${imgs_html_2.length ? '<div class="imgs imgs-line2">'+ imgs_html_2.join('\n') +'</div>' : ''}
       </div>
-      ${imgs_html_2.length ? '<div class="imgs imgs-line2">'+ imgs_html_2.join('\n') +'</div>' : ''}
     </div>
     <div class="footer-xxx">
     </div>
